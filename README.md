@@ -4,13 +4,15 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Para forzar que corra en Landscape/apaisado
+https://stackoverflow.com/questions/66288113/how-to-keep-app-in-portrait-mode-only-in-flutter
 
-A few resources to get you started if this is your first Flutter project:
+Build para Android.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+El build lo hago con: Build -> Flutter -> Build APK
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+El apk aparece en: build\app\outputs\flutter-apk\app-release.apk
+
+Build para Web
+
+flutter build web
