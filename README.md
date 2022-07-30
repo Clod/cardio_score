@@ -1,5 +1,6 @@
 # cardio_score
 
+OJO QUE ESTOY LABURANDO EN LA BRANCH MASTER (EN GITHUB HAY OTRA: MAIN)
 A new Flutter project.
 
 ## Getting Started

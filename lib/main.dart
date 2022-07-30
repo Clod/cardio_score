@@ -1,7 +1,12 @@
 // main.dart
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'clod_segmented_control.dart';
+import 'package:intl/intl.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+// https://phrase.com/blog/posts/flutter-localization/
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 const TextStyle _textStylePobre = TextStyle(
   fontWeight: FontWeight.bold,
@@ -41,6 +46,16 @@ class MyApp extends StatelessWidget {
       // Remove the debug banner
       debugShowCheckedModeBanner: false,
       title: 'Score',
+      localizationsDelegates: [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: [
+        Locale('en', ''), // English
+        Locale('es', ''), // Spanish
+      ],
       home: MyHomePage(),
     );
   }
@@ -86,16 +101,16 @@ class MyHomePageState extends State<MyHomePage> {
               double.parse(_selectedValueGlucemia!)) /
           7;
       if (_puntaje == 1) {
-        _score = "Ideal";
+        _score = AppLocalizations.of(context)!.ideal;
         _colorScore = CupertinoColors.systemTeal;
       } else if (_puntaje > 1.0 && _puntaje < 1.5) {
-        _score = "Leve";
+        _score = AppLocalizations.of(context)!.ideal;
         _colorScore = CupertinoColors.activeGreen;
       } else if (_puntaje >= 1.5 && _puntaje <= 2.0) {
-        _score = "Intermedia";
+        _score = AppLocalizations.of(context)!.intermediate;
         _colorScore = CupertinoColors.activeOrange;
       } else {
-        _score = "Pobre";
+        _score = AppLocalizations.of(context)!.poor;
         _colorScore = CupertinoColors.destructiveRed;
       }
       _scoreVisible = true;
@@ -106,8 +121,8 @@ class MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
-        middle: Text('Score de Salud Cardiovascular Infantil'),
+      navigationBar: CupertinoNavigationBar(
+        middle: Text(AppLocalizations.of(context)!.appTitle),
       ),
       child: Center(
         // width: 800,
@@ -129,7 +144,7 @@ class MyHomePageState extends State<MyHomePage> {
                   children: {
                     '0': Container(
                       width: 130,
-                      child: const Text('Métrica',
+                      child: Text(AppLocalizations.of(context)!.metric,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -137,7 +152,7 @@ class MyHomePageState extends State<MyHomePage> {
                     ),
                     '3': Container(
                       width: 130,
-                      child: const Text('Pobre',
+                      child: Text(AppLocalizations.of(context)!.poor,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -145,7 +160,7 @@ class MyHomePageState extends State<MyHomePage> {
                     ),
                     '2': Container(
                       width: 130,
-                      child: const Text('Intermedia',
+                      child: Text(AppLocalizations.of(context)!.intermediate,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -153,7 +168,7 @@ class MyHomePageState extends State<MyHomePage> {
                     ),
                     '1': Container(
                       width: 130,
-                      child: const Text('Ideal',
+                      child: Text(AppLocalizations.of(context)!.ideal,
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -174,8 +189,8 @@ class MyHomePageState extends State<MyHomePage> {
                 children: {
                   '0': Container(
                     width: 130,
-                    child: const Text(
-                      'Fuma',
+                    child: Text(
+                      AppLocalizations.of(context)!.metricSmokingStatus,
                       textAlign: TextAlign.left,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -184,24 +199,24 @@ class MyHomePageState extends State<MyHomePage> {
                   ),
                   '3': Container(
                     width: 130,
-                    child: const Text(
-                      '> 30 días',
+                    child: Text(
+                      AppLocalizations.of(context)!.poorSmokingStatus,
                       textAlign: TextAlign.center,
                       style: _textStylePobre,
                     ),
                   ),
                   '2': Container(
                     width: 130,
-                    child: const Text(
-                      'Interm.',
+                    child: Text(
+                      AppLocalizations.of(context)!.intermSmokingStatus,
                       textAlign: TextAlign.center,
                       style: _textStyleInterm,
                     ),
                   ),
                   '1': Container(
                     width: 130,
-                    child: const Text(
-                      'Nunca',
+                    child: Text(
+                      AppLocalizations.of(context)!.idealSmokingStatus,
                       textAlign: TextAlign.center,
                       style: _textStyleIdeal,
                     ),
@@ -221,31 +236,34 @@ class MyHomePageState extends State<MyHomePage> {
                 children: {
                   '0': Container(
                     width: 130,
-                    child: const Text('BMI',
+                    child: Text(AppLocalizations.of(context)!.metricBMI,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: CupertinoColors.black)),
                   ),
                   '3': Container(
                     width: 130,
-                    child: const Text(
-                      '>percentilo95',
+                    child: Text(
+                      AppLocalizations.of(context)!.poorBMI,
                       textAlign: TextAlign.center,
                       style: _textStylePobre,
                     ),
                   ),
                   '2': Container(
                     width: 130,
-                    child: const Text(
-                      '85-90 pc',
+                    child: Text(
+                      AppLocalizations.of(context)!.intermBMI,
                       textAlign: TextAlign.center,
                       style: _textStyleInterm,
                     ),
                   ),
                   '1': Container(
                     width: 130,
-                    child: const Text('<85', textAlign: TextAlign.center,
-                      style: _textStyleIdeal,),
+                    child: Text(
+                      AppLocalizations.of(context)!.idealBMI,
+                      textAlign: TextAlign.center,
+                      style: _textStyleIdeal,
+                    ),
                   ),
                 },
                 onValueChanged: (String value) {
@@ -262,33 +280,38 @@ class MyHomePageState extends State<MyHomePage> {
                 children: {
                   '0': Container(
                     width: 130,
-                    child: const Text('Actividad física',
+                    child: Text(
+                        AppLocalizations.of(context)!
+                            .metricPhysicalActivityLevel,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: CupertinoColors.black)),
                   ),
                   '3': Container(
                     width: 130,
-                    child: const Text(
-                      'Ninguna',
+                    child: Text(
+                      AppLocalizations.of(context)!.poorPhysicalActivityLevel,
                       textAlign: TextAlign.center,
                       style: _textStylePobre,
                     ),
                   ),
                   '2': Container(
                     width: 130,
-                    child: const Text(
-                      '0 a 60 min dia',
+                    child: Text(
+                      AppLocalizations.of(context)!.intermPhysicalActivityLevel,
                       textAlign: TextAlign.center,
                       style: _textStyleInterm,
                     ),
                   ),
                   '1': Container(
                     width: 130,
-                    child: const Padding(
+                    child:  Padding(
                       padding: EdgeInsets.all(4.0),
-                      child: Text('>60min', textAlign: TextAlign.center,
-                        style: _textStyleIdeal,),
+                      child: Text(
+                        AppLocalizations.of(context)!.idealPhysicalActivityLevel,
+                        textAlign: TextAlign.center,
+                        style: _textStyleIdeal,
+                      ),
                     ),
                   ),
                 },
@@ -306,34 +329,37 @@ class MyHomePageState extends State<MyHomePage> {
                 children: {
                   '0': Container(
                     width: 130,
-                    child: const Text('Score dieta sana',
+                    child: Text(
+                        AppLocalizations.of(context)!.metricHealthyDietScore,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: CupertinoColors.black)),
                   ),
                   '3': Container(
                     width: 130,
-                    child: const Text(
-                      '0-1 componentes',
+                    child: Text(
+                      AppLocalizations.of(context)!.poorHealthyDietScore,
                       textAlign: TextAlign.center,
                       style: _textStylePobre,
                     ),
                   ),
                   '2': Container(
                     width: 130,
-                    child: const Text(
-                      '2-3 componentes',
+                    child: Text(
+                      AppLocalizations.of(context)!.intermHealthyDietScore,
                       textAlign: TextAlign.center,
                       style: _textStyleInterm,
                     ),
                   ),
                   '1': Container(
                     width: 130,
-                    child: const Padding(
+                    child: Padding(
                       padding: EdgeInsets.all(4.0),
-                      child:
-                          Text('4-5 componentes', textAlign: TextAlign.center,
-                            style: _textStyleIdeal,),
+                      child: Text(
+                        AppLocalizations.of(context)!.idealHealthyDietScore,
+                        textAlign: TextAlign.center,
+                        style: _textStyleIdeal,
+                      ),
                     ),
                   ),
                 },
@@ -351,33 +377,37 @@ class MyHomePageState extends State<MyHomePage> {
                 children: {
                   '0': Container(
                     width: 130,
-                    child: const Text('Colesterol total',
+                    child: Text(
+                        AppLocalizations.of(context)!.metricTotalChoresterol,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: CupertinoColors.black)),
                   ),
                   '3': Container(
                     width: 130,
-                    child: const Text(
-                      '>200mg/dl',
+                    child: Text(
+                      AppLocalizations.of(context)!.poorTotalChoresterol,
                       textAlign: TextAlign.center,
                       style: _textStylePobre,
                     ),
                   ),
                   '2': Container(
                     width: 130,
-                    child: const Text(
-                      '170-190 mg/dl',
+                    child: Text(
+                      AppLocalizations.of(context)!.intermTotalChoresterol,
                       textAlign: TextAlign.center,
                       style: _textStyleInterm,
                     ),
                   ),
                   '1': Container(
                     width: 130,
-                    child: const Padding(
+                    child: Padding(
                       padding: EdgeInsets.all(4.0),
-                      child: Text('<200mg/dl', textAlign: TextAlign.center,
-                        style: _textStyleIdeal,),
+                      child: Text(
+                        AppLocalizations.of(context)!.idealTotalChoresterol,
+                        textAlign: TextAlign.center,
+                        style: _textStyleIdeal,
+                      ),
                     ),
                   ),
                 },
@@ -395,33 +425,37 @@ class MyHomePageState extends State<MyHomePage> {
                 children: {
                   '0': Container(
                     width: 130,
-                    child: const Text('Presion arterial',
+                    child: Text(
+                        AppLocalizations.of(context)!.metricBloodPressure,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: CupertinoColors.black)),
                   ),
                   '3': Container(
                     width: 130,
-                    child: const Text(
-                      '>percentilo95',
+                    child: Text(
+                      AppLocalizations.of(context)!.poorBloodPressure,
                       textAlign: TextAlign.center,
                       style: _textStylePobre,
                     ),
                   ),
                   '2': Container(
                     width: 130,
-                    child: const Text(
-                      '90-95 pc',
+                    child: Text(
+                      AppLocalizations.of(context)!.intermBloodPressure,
                       textAlign: TextAlign.center,
                       style: _textStyleInterm,
                     ),
                   ),
                   '1': Container(
                     width: 130,
-                    child: const Padding(
+                    child:  Padding(
                       padding: EdgeInsets.all(4.0),
-                      child: Text('<90pc', textAlign: TextAlign.center,
-                        style: _textStyleIdeal,),
+                      child: Text(
+                        AppLocalizations.of(context)!.idealBloodPressure,
+                        textAlign: TextAlign.center,
+                        style: _textStyleIdeal,
+                      ),
                     ),
                   ),
                 },
@@ -439,33 +473,37 @@ class MyHomePageState extends State<MyHomePage> {
                 children: {
                   '0': Container(
                     width: 130,
-                    child: const Text('Glucemia',
+                    child: Text(
+                        AppLocalizations.of(context)!.metricFastingBloodGlucose,
                         style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: CupertinoColors.black)),
                   ),
                   '3': Container(
                     width: 130,
-                    child: const Text(
-                      '>126 mg/dl',
+                    child:  Text(
+                      AppLocalizations.of(context)!.poorFastingBloodGlucose,
                       textAlign: TextAlign.center,
                       style: _textStylePobre,
                     ),
                   ),
                   '2': Container(
                     width: 130,
-                    child: const Text(
-                      '100-125 mg/dl',
+                    child:  Text(
+                      AppLocalizations.of(context)!.intermFastingBloodGlucose,
                       textAlign: TextAlign.center,
                       style: _textStyleInterm,
                     ),
                   ),
                   '1': Container(
                     width: 130,
-                    child: const Padding(
+                    child:  Padding(
                       padding: EdgeInsets.all(4.0),
-                      child: Text('<100 mg/dl', textAlign: TextAlign.center,
-                        style: _textStyleIdeal,),
+                      child: Text(
+                        AppLocalizations.of(context)!.idealFastingBloodGlucose,
+                        textAlign: TextAlign.center,
+                        style: _textStyleIdeal,
+                      ),
                     ),
                   ),
                 },
@@ -483,7 +521,8 @@ class MyHomePageState extends State<MyHomePage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(30.0, 10.0, 10.0, 0.0),
                     child: Text(
-                      'Puntaje: ${_puntaje.toStringAsFixed(1)}',
+                      AppLocalizations.of(context)!.result +
+                          '${_puntaje.toStringAsFixed(1)}',
                       style: const TextStyle(
                         fontSize: 15.0,
                         fontWeight: FontWeight.bold,
@@ -495,7 +534,7 @@ class MyHomePageState extends State<MyHomePage> {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(20.0, 10.0, 0.0, 0.0),
                     child: Text(
-                      'Score: ',
+                      AppLocalizations.of(context)!.score,
                       style: TextStyle(
                         fontSize: 15.0,
                         fontWeight: FontWeight.bold,
