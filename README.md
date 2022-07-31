@@ -3,6 +3,10 @@
 OJO QUE ESTOY LABURANDO EN LA BRANCH MASTER (EN GITHUB HAY OTRA: MAIN)
 A new Flutter project.
 
+Tutorial sobre internacionalización:
+
+https://phrase.com/blog/posts/flutter-localization/
+
 ## Getting Started
 
 Para forzar que corra en Landscape/apaisado
