@@ -39,6 +39,7 @@ dependencies:
   flutter_form_builder: ^7.2.1
   form_builder_validators: ^8.1.1
   flutter_launcher_icons: ^0.9.3
+  flutter_native_splash: ^2.2.6
 
 dev_dependencies:
   flutter_test:
@@ -48,6 +49,14 @@ flutter_icons:
   ios: true
   android: true
   image_path: "assets/logo_cardio_score.png"
+
+flutter_native_splash:
+  color: "#42a5f5"
+  image: "assets/splash_cardio_score.png"
+  android: true
+  ios: true
+  android_12:
+    image: "assets/splash_cardio_score_android_12.png"
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
