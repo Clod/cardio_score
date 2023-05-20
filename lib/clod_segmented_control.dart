@@ -15,7 +15,7 @@ import 'package:flutter/widgets.dart';
 const EdgeInsetsGeometry _kHorizontalItemPadding = EdgeInsets.symmetric(horizontal: 0.0);
 
 // Minimum height of the segmented control.
-const double _kMinSegmentedControlHeight = 28.0;
+const double _kMinSegmentedControlHeight = 14.0;
 
 // The duration of the fade animation used to transition when a new widget
 // is selected.
@@ -588,6 +588,7 @@ class _RenderSegmentedControl<T> extends RenderBox
       childParentData.offset = childOffset;
       final Rect childRect = Rect.fromLTWH(start, 0.0, child.size.width, child.size.height);
       final RRect rChildRect;
+      /* No quiero los bordes del primero y el último redondeados
       if (child == leftChild) {
         rChildRect = RRect.fromRectAndCorners(
           childRect,
@@ -601,8 +602,11 @@ class _RenderSegmentedControl<T> extends RenderBox
           bottomRight: const Radius.circular(3.0),
         );
       } else {
+
+       */
         rChildRect = RRect.fromRectAndCorners(childRect);
-      }
+      // }
+
       childParentData.surroundingRect = rChildRect;
       start += child.size.width;
       child = nextChild(child);
